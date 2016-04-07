@@ -72,7 +72,18 @@ app.controller("SiteController",["$scope", "$http", "$log", "$mdDialog", "$mdToa
 		.error(function(err) {
 			$log.error(err);
 		});
-
+	function DialogControllers($scope,$mdDialog){
+		$scope.hide = function() {
+			$mdDialog.hide();
+		};
+		$scope.cancel = function() {
+			$mdDialog.cancel();
+		};
+		$scope.answer = function(answer) {
+			console.log('clicked');
+			$mdDialog.hide(answer);
+		};
+	}
 	$scope.closeDialog = function() {
 		$mdDialog.hide();
 	};
@@ -96,7 +107,6 @@ app.controller("SiteController",["$scope", "$http", "$log", "$mdDialog", "$mdToa
 	    });
 	};
     $scope.ShowModalInsert = function($event){
-    	alert("Enter Insert");
     	$scope.objectsUpdate = [];
 		$mdDialog.show({
 			clickOutsideToClose: true,
@@ -105,10 +115,12 @@ app.controller("SiteController",["$scope", "$http", "$log", "$mdDialog", "$mdToa
 			templateUrl:"/modules/site/views/site.dialog.client.view",
 			controller: "DialogController",
 			scope:$scope
+		}).finally(function() {
+			//alert("Closed");
 		});
     };
     $scope.ShowModalUpdate = function(objects,$event){
-    	alert("Enter Update");
+    	//alert(JSON.stringify(objects));
         $scope.objectsUpdate = objects;
         $mdDialog.show({
 			clickOutsideToClose: true,
@@ -117,6 +129,8 @@ app.controller("SiteController",["$scope", "$http", "$log", "$mdDialog", "$mdToa
 			templateUrl:"/modules/site/views/site.dialog.client.view",
 			controller: "DialogController",
 			scope:$scope
+		}).finally(function() {
+			//alert("Closed");
 		});
     };
     $scope.UpdateStatusFlag = function(uid,name,statusflag){
