@@ -1,0 +1,43 @@
+md-dialog(aria-label="Management",ng-cloak)
+	md-toolbar
+		div(class="md-toolbar-tools")
+			h2 Management
+			span(flex)
+				md-button(class="md-icon-button",ng-click="closeDialog($event)")
+					md-icon(aria-label="Close dialog") close
+	md-content(style="padding:10px;")
+		form(name="formDefault",novalidate)
+			input(name="uid",type="text",ng-model="forms.uid",ng-init="forms.uid=uidUpdate",style="display:none;")
+			table
+				tr
+					td 
+						//md-icon done
+						strong
+							label(for="statusFlag") Active
+					td
+						input(name="statusFlag",type="checkbox",ng-model="forms.statusflag",ng-true-value="'A'",ng-false-value="'I'",ng-init="forms.statusflag=statusflagUpdate")
+				tr
+					td
+						//md-icon fingerprint
+						strong()
+							label(for="code") Code
+					td
+						input(name="code",type="text",placeholder="Code",class="form-control",style="width:200px;",ng-model="forms.code",ng-init="forms.code=codeUpdate",required,ng-minlength="3",ng-maxlength="10",autocomplete="off")
+						div(class="alert alert-danger",ng-show="formDefault.code.$touched && formDefault.code.$invalid")
+							a(href="#",class="close",data-dismiss="alert",aria-label="close") &times;
+							strong Fail! 
+							span Some reason.
+				tr
+					td
+						//md-icon art_track
+						strong()
+							label(for="name") Name
+					td
+						input(name="name",type="text",placeholder="Name",class="form-control",style="width:200px;",ng-model="forms.name",ng-init="forms.name=nameUpdate",required,ng-minlength="3",ng-maxlength="100",autocomplete="off")
+						div(class="alert alert-danger",ng-show="formDefault.name.$touched && formDefault.name.$invalid")
+							a(href="#",class="close",data-dismiss="alert",aria-label="close") &times;
+							strong Fail! 
+							span Some reason.
+			div
+				md-button(class="md-raised md-primary",ng-disabled="formDefault.$invalid",ng-click="Submit()") Submit
+				md-button(class="md-raised md-warn",ng-click="Cancel()") Cancel

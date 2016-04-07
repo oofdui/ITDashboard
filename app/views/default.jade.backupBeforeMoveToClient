@@ -1,0 +1,55 @@
+doctype html
+html
+	head
+		title=title
+		meta(name="viewport",content="width=device-width, initial-scale=1")
+
+		link(rel="stylesheet",href="https://fonts.googleapis.com/icon?family=Material+Icons")
+		link(rel="stylesheet",href="/lib/angular-material/angular-material.css")
+		link(rel="stylesheet",href="/css/cssDefault.css")
+		
+	body#mainApp(ng-controller="DefaultController",layout="column")
+		md-toolbar(layout="row")
+			md-button(class="menu",ng-click="toggleMenu()",hide-gt-sm,aria-label="Show Menu")
+				md-icon menu
+			h3 Angular Material Starter
+
+		div(class="container",layout="row",flex)
+			md-sidenav(ng-click="toggleMenu()",md-component-id="left",md-is-locked-open="$mdMedia('gt-sm')",class="md-whiteframe-4dp")
+				md-toolbar(layout="row",hide-gt-sm)
+					md-button(class="menu",aria-label="Show Menu")
+						md-icon menu
+					h3 Menu
+				md-list(flex)
+					md-list-item
+						md-button(ng-class="isMenuActive('home') ? 'md-primary' : ''",ui-sref="default")
+							md-icon home
+							| Home
+					md-list-item
+						md-button(ng-class="isMenuActive('site') ? 'md-primary' : ''",ui-sref="site")
+							md-icon device_hub
+							| Site
+
+			md-content(flex,id="content")
+				div(ui-view)
+
+		script(type="text/javascript",src="/lib/angular/angular.min.js")
+		script(type="text/javascript",src="/lib/angular-ui-router/angular-ui-router.js")
+		script(type="text/javascript",src="/lib/angular-material/angular-animate.min.js")
+		script(type="text/javascript",src="/lib/angular-material/angular-aria.min.js")
+		script(type="text/javascript",src="/lib/angular-material/angular-messages.min.js")
+		script(type="text/javascript",src="/lib/angular-material/angular-material.min.js")
+
+		script(type="text/javascript",src="/lib/jquery/jquery-1.12.0.min.js")
+		script(type="text/javascript",src="/lib/bootstrap/js/bootstrap.min.js")
+		script(type="text/javascript",src="/lib/bootstrap-ui/ui-bootstrap-tpls.min.js")
+		script(type="text/javascript",src="/modules/core/core.client.module.js")
+		script(type="text/javascript",src="/modules/core/config/core.client.routes.js")
+
+		script(type="text/javascript",src="/modules/default/default.client.module.js")
+		script(type="text/javascript",src="/modules/default/config/default.client.routes.js")
+		script(type="text/javascript",src="/modules/default/controllers/default.client.controller.js")
+		script(type="text/javascript",src="/modules/site/site.client.module.js")
+		script(type="text/javascript",src="/modules/site/controllers/site.client.controller.js")
+
+		script(type="text/javascript",src="/application.js")

@@ -1,0 +1,77 @@
+div(ng-app="site")
+	div(ng-controller="SiteController as c")
+		md-toolbar(class="md-table-toolbar md-default")
+			div(class="md-toolbar-tools")
+				h2 Site List
+				div(flex)
+				md-button(ng-click="ShowModalInsert($event)",class="md-fab md-mini md-primary md-hue-2",arial-label="Add New")
+					md-icon add
+					md-tooltip(md-direction="left") Add New
+		md-table-container
+			table(md-table,md-row-select,md-progress="promise")
+				thead(md-head)
+					tr(md-row)
+						th(md-column,style="text-align:center;") Active
+						th(md-column,style="text-align:center;") Code
+						th(md-column) Name
+						th(md-column,style="text-align:center;") LastModify
+						th(md-column)  
+				tbody(md-body)
+					tr(md-row,md-auto-select,ng-repeat="result in results")
+						td(md-cell,style="text-align:center;")
+							md-switch(ng-model="result.statusflag",ng-true-value="'A'",ng-false-value="'I'",aria-label="StatusFlag",ng-change="UpdateStatusFlag(result.uid,result.name,result.statusflag)")
+						td(md-cell,style="text-align:center;") {{ result.name }}
+						td(md-cell) {{ result.detail }}
+						td(md-cell,style="text-align:center;") {{ result.mwhen | date:"dd/MM/yyyy HH:mm" }}
+						td(md-cell,style="text-align:center;")
+							section(layout="row",layout-align="center center")
+								md-button(ng-click="ShowModalUpdate(result,$event)",class="md-fab md-mini md-primary")
+									md-icon mode_edit
+									md-tooltip(md-direction="top") Edit
+								md-button(ng-click="Delete($event,result.uid)",class="md-fab md-mini md-warn")
+									md-icon remove
+									md-tooltip(md-direction="top") Delete
+				tfoot(md-head)
+					tr(md-row)
+						th(md-column,style="text-align:center;") Active
+						th(md-column,style="text-align:center;") Code
+						th(md-column) Name
+						th(md-column,style="text-align:center;") LastModify
+						th(md-column)  
+		div
+			{{ message }}
+		
+		script(type="text/ng-template",id="modalDefault.html")
+			div(class="modal-header")
+				h3(class="modal-title") Management
+			div(class="modal-body")
+				form(name="formDefault",novalidate)
+					input(name="uid",type="text",ng-model="forms.uid",ng-init="forms.uid=uidUpdate",style="display:none;")
+					div(style="margin-top:10px;background-color:#FAFAFA;border:1px solid #DDD;padding:10px;margin:10px;")
+						div(class="form-group")
+							input(name="statusFlag",type="checkbox",ng-model="forms.statusflag",ng-true-value="'A'",ng-false-value="'I'",ng-init="forms.statusflag=statusflagUpdate")
+							|  Active
+							// {{ forms.statusflag }}
+						div(class="form-group")
+							span(class="glyphicon glyphicon-th-large")
+							strong(style="padding-left:5px;")
+								label(for="code") Code
+							input(name="code",type="text",placeholder="Code",class="form-control",style="width:200px;",ng-model="forms.code",ng-init="forms.code=codeUpdate",required,ng-minlength="3",ng-maxlength="10",autocomplete="off")
+							div(class="alert alert-danger",ng-show="formDefault.code.$touched && formDefault.code.$invalid")
+								a(href="#",class="close",data-dismiss="alert",aria-label="close") &times;
+								strong Fail! 
+								span Some reason.
+
+						div(class="form-group")
+							span(class="glyphicon glyphicon-th-list")
+							strong(style="padding-left:5px;")
+								label(for="name") Name
+							input(name="name",type="text",placeholder="Name",class="form-control",style="width:200px;",ng-model="forms.name",ng-init="forms.name=nameUpdate",required,ng-minlength="3",ng-maxlength="100",autocomplete="off")
+							div(class="alert alert-danger",ng-show="formDefault.name.$touched && formDefault.name.$invalid")
+								a(href="#",class="close",data-dismiss="alert",aria-label="close") &times;
+								strong Fail! 
+								span Some reason.
+			div(class="modal-footer")
+				div(class="form-group")
+					button(type="submit",class="btn btn-primary",ng-disabled="formDefault.$invalid",ng-click="Submit()") Submit
+					button(type="button",class="btn btn-warning",ng-click="Cancel()") Cancel

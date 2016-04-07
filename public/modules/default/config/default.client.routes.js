@@ -1,0 +1,19 @@
+angular.module("default").config([
+	"$mdThemingProvider","$stateProvider",
+	function($mdThemingProvider,$stateProvider){
+		$mdThemingProvider.theme('default')
+			.primaryPalette("blue")/*indigo*/
+			.accentPalette("orange")/*pink*/
+			.warnPalette("red")/*red*/
+			.backgroundPalette("grey")/*grey*/;
+		$stateProvider
+			.state("default",{
+				url:"/",
+				templateUrl:"/modules/users/views/login.client.view"
+			})
+			.state("site",{
+				url:"/site",
+				templateUrl:"/modules/site/views/site.client.view"
+			});
+	}
+]);

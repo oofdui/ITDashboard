@@ -1,0 +1,28 @@
+doctype html
+html
+	head
+		title=title
+	body#mainApp
+		if username
+			h2 Hello #{username}
+			div
+				form(name="logout",method="post",action="/logout")
+					input(type="submit",value="Logout")
+		else
+			div
+				a(ui-sref="signup") Sign up
+			div
+				a(ui-sref="login") Log in
+
+		div(ui-view)
+
+		script(type="text/javascript",src="/lib/angular/angular.min.js")
+		script(type="text/javascript",src="/lib/angular-ui-router/angular-ui-router.js")
+		script(type="text/javascript",src="/modules/core/core.client.module.js")
+		script(type="text/javascript",src="/modules/core/config/core.client.routes.js")
+
+		script(type="text/javascript",src="/modules/users/users.client.module.js")
+		script(type="text/javascript",src="/modules/users/config/users.client.routes.js")
+		script(type="text/javascript",src="/modules/users/controllers/auth.client.controller.js")
+		
+		script(type="text/javascript",src="/application.js")

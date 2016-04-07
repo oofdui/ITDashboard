@@ -1,0 +1,77 @@
+doctype html
+html
+	head
+		title=title
+		meta(name="viewport",content="width=device-width, initial-scale=1")
+
+		link(rel="stylesheet",href="https://fonts.googleapis.com/icon?family=Material+Icons")
+		link(rel='stylesheet',href="/lib/mdl/material.min.css")
+		link(rel="stylesheet",href="/css/cssDefault.css")
+		
+	body#mainApp(ng-controller="DefaultController")
+		//Always shows a header, even in smaller screens.
+		div(class="mdl-layout mdl-js-layout mdl-layout--fixed-header")
+			header(class="mdl-layout__header")
+				div(class="mdl-layout__header-row")
+					//Title
+					span(class="mdl-layout-title")=title
+					//Add spacer, to align navigation to the right
+					div(class="mdl-layout-spacer")
+					//Navigation. We hide it in small screens.
+					nav(class="mdl-navigation mdl-layout--large-screen-only")
+						a(class="mdl-navigation__link",ui-sref="default")
+							i(class="material-icons") home
+							|  Home
+						a(class="mdl-navigation__link",ui-sref="site")
+							i(class="material-icons") device_hub
+							|  Site
+					div(class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-layout--large-screen-only")
+						label(class="mdl-button mdl-js-button mdl-button--icon",for="fixed-header-drawer-exp")
+							i(class="material-icons") search
+						div(class="mdl-textfield__expandable-holder")
+							input(class="mdl-textfield__input",type="text",name="sample",id="fixed-header-drawer-exp")
+					div(class="mdl-textfield--align-right mdl-layout--large-screen-only")
+						span(class="mdl-list__item",style="color:#FFF;")
+							i(class="material-icons") perm_identity
+							|  Oofdui
+			div(class="mdl-layout__drawer")
+				header(class="mdl-layout__header")
+					div(class="mdl-layout__header-row")
+						span(class="mdl-layout-title") Menu
+						div(class="mdl-layout-spacer")
+				nav(class="mdl-navigation")
+					a(class="mdl-navigation__link",ui-sref="default")
+						i(class="material-icons") home
+						|  Home
+					a(class="mdl-navigation__link",ui-sref="site")
+						i(class="material-icons") device_hub
+						|  Site
+			main(class="mdl-layout__content",style="padding:10px;")
+				div(ui-view)
+			footer(class="mdl-mini-footer")
+				div(class="mdl-mini-footer__left-section")
+					div(class="mdl-logo")=title
+					ul(class="mdl-mini-footer__link-list")
+						li
+							a(href="#") Help
+						li
+							a(href="#") Privacy & Terms
+					span(style="font-size:8pt;") ©2016 GooDesign.in.th All rights reserved. Powered by nithi.re
+
+		script(type="text/javascript",src="/lib/angular/angular.min.js")
+		script(type="text/javascript",src="/lib/angular-ui-router/angular-ui-router.js")
+		script(type="text/javascript",src="/lib/jquery/jquery-1.12.0.min.js")
+		script(type="text/javascript",src="/lib/bootstrap/js/bootstrap.min.js")
+		script(type="text/javascript",src="/lib/bootstrap-ui/ui-bootstrap-tpls.min.js")
+		script(type="text/javascript",src="/modules/core/core.client.module.js")
+		script(type="text/javascript",src="/modules/core/config/core.client.routes.js")
+		
+		script(type="text/javascript",src="/lib/mdl/material.min.js")
+
+		script(type="text/javascript",src="/modules/default/default.client.module.js")
+		script(type="text/javascript",src="/modules/default/config/default.client.routes.js")
+		script(type="text/javascript",src="/modules/default/controllers/default.client.controller.js")
+		script(type="text/javascript",src="/modules/site/site.client.module.js")
+		script(type="text/javascript",src="/modules/site/controllers/site.client.controller.js")
+
+		script(type="text/javascript",src="/application.js")

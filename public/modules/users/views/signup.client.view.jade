@@ -1,0 +1,24 @@
+h2 Sign up
+form(name="signupForm",ng-controller="AuthController",ng-submit="signup(signupForm.$valid)",novalidate)
+	div
+		label(for="username") Username
+		input(name="username",type="text",placeholder="Username",ng-model="user.username",ng-maxlength="10",required)
+	div
+		label(for="firstname") Firstname
+		input(name="firstname",type="text",placeholder="Firstname",ng-model="user.firstname",required)
+	div
+		label(for="lastname") Lastname
+		input(name="lastname",type="text",placeholder="Lastname",ng-model="user.lastname",required)
+	div
+		label(for="email") Email
+		input(name="email",type="email",placeholder="Email",ng-model="user.email",required)
+		div(style="color:red;",ng-show="signupForm.email.$touched && signupForm.email.$invalid") Invalid Email without reason.
+		div(style="color:red;",ng-show="signupForm.email.$touched && signupForm.email.$error.required") Require.
+		div(style="color:red;",ng-show="signupForm.email.$touched && signupForm.email.$error.email") Email invalid.
+	div
+		label(for="password") Password
+		input(name="password",type="password",placeholder="Password",ng-model="user.password",ng-minlength="6",required)
+	div
+		input(type="submit",value="Sign up",ng-disabled="signupForm.$invalid")
+		div(ng-show="error")
+			strong(ng-bind="error")

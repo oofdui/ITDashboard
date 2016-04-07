@@ -1,0 +1,90 @@
+@import url("cssFontFace.css");
+
+$font-default-stack:tahoma,sans-serif;
+$font-head-stack:thaisans_neuebold,tahoma;
+$font-subhead-stack:thaisans_neueregular,tahoma;
+$primary-color:#3C7A7A;
+$secondary-color:#90B7B7;
+$background-color:#FAFAFA;
+$font-color:#444;
+$border-color:#DDD;
+$table-background-color-dark:#EDEDED;
+$table-background-color-light:#FAFAFA;
+$table-background-color-hover:#EAEAEA;
+$header-background-color:#0084ff;
+
+html,body
+{
+    font-family:$font-default-stack;
+    color:$font-color;
+    width:100%;height:100%;
+}
+body
+{
+    background-color:$background-color;
+}
+//######################## MaterialDesignLite (MDL) Customize ########################
+//Style the header:
+.mdl-layout__header{
+  background-color:$header-background-color;
+}
+//Style the sidebar navigation title:
+.mdl-layout__drawer span.mdl-layout-title {
+  background-color:$header-background-color;
+  border-right:0;
+  color: #FFF;
+}
+//Style the sidebar navigation links:
+.mdl-layout__drawer a.mdl-navigation__link {
+  color: #eee;
+  font-weight: 700;
+  font-size: 14px;
+}
+.mdl-layout__drawer{
+  border-right:0;
+}
+.mdl-layout__drawer a.mdl-navigation__link:hover {
+  color: #000;
+}
+//Style the background colour of the sidebar navigation
+.mdl-layout .mdl-layout__drawer{
+  //background: #FFF;
+}
+//Style Fab mini button
+.mdl-button--fab.mdl-button--mini-fab {
+  height: 40px;
+  min-width: 40px;
+  width: 40px;
+}
+.mdl-button--fab:active {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  background-color: rgba(158,158,158, 0.40); }
+.mdl-button--fab:focus:not(:active) {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.18), 0 8px 16px rgba(0, 0, 0, 0.36);
+  background-color: rgba(158,158,158, 0.40); }
+.mdl-button--fab.mdl-button--colored {
+  background: rgb(255,64,129);
+  color: rgb(255,255,255); }
+.mdl-button--fab.mdl-button--colored:hover {
+  background-color: rgb(255,64,129); }
+.mdl-button--fab.mdl-button--colored:focus:not(:active) {
+  background-color: rgb(255,64,129); }
+.mdl-button--fab.mdl-button--colored:active {
+  background-color: rgb(255,64,129); }
+.mdl-button--fab.mdl-button--colored .mdl-ripple {
+  background: rgb(255,255,255); }
+//Style Table
+@media only screen and (max-width: 480px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  thead,tfoot {
+    display: none;
+  }
+  .mdl-data-table tbody tr {
+    height: auto;
+  }
+  .mdl-data-table tbody tr:nth-child(even) {
+    background-color: #eee;
+  }
+}

@@ -1,0 +1,88 @@
+doctype html
+html
+	head
+		title=title
+		meta(name="viewport",content="width=device-width, initial-scale=1")
+		link(rel="stylesheet",href="/lib/bootstrap/css/bootstrap.min.css")
+		link(rel="stylesheet",href="/lib/bootstrap/css/bootstrap-theme.min.css")
+		link(rel="stylesheet",href="/css/cssDefault.css")
+	body
+		div(ng-app="site",style="padding:10px;")
+			div(ng-controller="SiteController as c")
+				h1=header
+				h3 This is second page for connect PostgeSQL database without refreshing.
+
+				button(ng-click="ShowModalInsert()",class="btn btn-primary") Add New
+				div(class="table-responsive")
+					div(class="tbHeader") 
+						h3 รายชื่อโรงพยาบาลในเครือ
+					table(class="table table-bordered table table-hover",style="margin-top:10px;")
+						thead
+							tr
+								th Active
+								th Code
+								th Name
+								th LastModify
+								th
+						tbody
+							tr(ng-repeat="result in results")
+								td(style="text-align:center;")
+									input(type="checkbox",ng-model="result.statusflag",ng-true-value="'A'",ng-false-value="'I'",ng-checked="result.statusflag === 'A'")
+								td(style="text-align:center;") {{ result.name }}
+								td(style="text-align:center;") {{ result.detail }}
+								td(style="text-align:center;") {{ result.mwhen | date:"dd/MM/yyyy HH:mm" }}
+								td(style="text-align:center;")
+									button(class="btn btn-info",data-toggle="modal",ng-click="ShowModalUpdate(result)") Edit
+									button(class="btn btn-danger",style="margin-left:5px;",ng-click="Delete(result.uid)")  Delete
+						tfoot
+							tr
+								th Active
+								th Code
+								th Name
+								th LastModify
+								th
+					div
+						{{ message }}
+				
+				script(type="text/ng-template",id="modalDefault.html")
+					div(class="modal-header")
+						h3(class="modal-title") Management
+					div(class="modal-body")
+						form(name="formDefault",novalidate)
+							input(name="uid",type="text",ng-model="forms.uid",ng-init="forms.uid=uidUpdate",style="display:none;")
+							div(style="margin-top:10px;background-color:#FAFAFA;border:1px solid #DDD;padding:10px;margin:10px;")
+								div(class="form-group")
+									input(name="statusFlag",type="checkbox",ng-model="forms.statusflag",ng-true-value="'A'",ng-false-value="'I'",ng-init="forms.statusflag=statusflagUpdate")
+									|  Active
+									// {{ forms.statusflag }}
+								div(class="form-group")
+									span(class="glyphicon glyphicon-th-large")
+									strong(style="padding-left:5px;")
+										label(for="code") Code
+									input(name="code",type="text",placeholder="Code",class="form-control",style="width:200px;",ng-model="forms.code",ng-init="forms.code=codeUpdate",required,ng-minlength="3",ng-maxlength="10",autocomplete="off")
+									div(class="alert alert-danger",ng-show="formDefault.code.$touched && formDefault.code.$invalid")
+										a(href="#",class="close",data-dismiss="alert",aria-label="close") &times;
+										strong Fail! 
+										span Some reason.
+
+								div(class="form-group")
+									span(class="glyphicon glyphicon-th-list")
+									strong(style="padding-left:5px;")
+										label(for="name") Name
+									input(name="name",type="text",placeholder="Name",class="form-control",style="width:200px;",ng-model="forms.name",ng-init="forms.name=nameUpdate",required,ng-minlength="3",ng-maxlength="100",autocomplete="off")
+									div(class="alert alert-danger",ng-show="formDefault.name.$touched && formDefault.name.$invalid")
+										a(href="#",class="close",data-dismiss="alert",aria-label="close") &times;
+										strong Fail! 
+										span Some reason.
+					div(class="modal-footer")
+						div(class="form-group")
+							button(type="submit",class="btn btn-primary",ng-disabled="formDefault.$invalid",ng-click="Submit()") Submit
+							button(type="button",class="btn btn-warning",ng-click="Cancel()") Cancel
+	
+	script(type="text/javascript",src="/lib/angular/angular.min.js")
+	script(type="text/javascript",src="/lib/jquery/jquery-1.12.0.min.js")
+	script(type="text/javascript",src="/lib/bootstrap/js/bootstrap.min.js")
+	script(type="text/javascript",src="/lib/bootstrap-ui/ui-bootstrap-tpls.min.js")
+	script(type="text/javascript",src="/lib/angular-ui-router/angular-ui-router.js")
+
+	script(type="text/javascript",src="modules/site/controllers/site.client.controller.js")

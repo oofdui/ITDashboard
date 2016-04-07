@@ -1,0 +1,12 @@
+h2 Login
+form(name="loginForm",ng-controller="AuthController",ng-submit="login(loginForm.$valid)",novalidate)
+	div
+		label(for="username") Username
+		input(name="username",type="text",placeholder="Username",ng-model="user.username",required)
+	div
+		label(for="password") Password
+		input(name="password",type="password",placeholder="Password",ng-model="user.password",required)
+	div
+		input(type="submit",value="Login",ng-disabled="loginForm.$invalid")
+		div(ng-show="error")
+			strong(ng-bind="error")
